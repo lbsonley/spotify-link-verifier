@@ -1,11 +1,10 @@
 {
   "license": "MIT",
   "devDependencies": {
-    "esbuild": "^0.15.16",
     "netlify-cli": "^12.2.8"
   },
   "scripts": {
-    "dev": "netlify-cli dev",
-    "build": "esbuild source/functions/verifier.js --bundle --outfile=build/verifier.js"
+    "dev": "netlify dev",
+    "deploy": "netlify deploy"
   }
 }

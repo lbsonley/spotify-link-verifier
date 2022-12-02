@@ -10,8 +10,8 @@
 import fetch from "node-fetch";
 
 const fetchSong = async (songId) => {
-  const client_id = "78e35333ba30494983159f462cde776c"; // Your client id
-  const client_secret = "b5244d50fb9440ebae22a61903fb24e9"; // Your secret
+  const client_id = process.env.CLIENT_ID; // Your client id
+  const client_secret = process.env.CLIENT_SECRET; // Your secret
 
   // your application requests authorization
   const authOptions = {

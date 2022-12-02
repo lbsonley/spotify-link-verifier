@@ -1,57 +1,57 @@
 (() => {
-    const elements = {};
+  const elements = {};
 
-    const serializeForm = (form)  => {
-        var obj = {};
-        var formData = new FormData(form);
-        for (var key of formData.keys()) {
-            obj[key] = formData.get(key);
-        }
-        return obj;
-    };
-
-    const displayResult = (result) => {
-        const { resultContainer } = elements;
-        resultContainer.innerHTML = result;
+  const serializeForm = (form) => {
+    var object = {};
+    var formData = new FormData(form);
+    for (var key of formData.keys()) {
+      object[key] = formData.get(key);
     }
+    return object;
+  };
 
-    const init = () => {
-        elements.form = document.querySelector('[data-js="form"]')
-        elements.resultContainer = document.querySelector('[data-js="result"]')
+  const displayResult = (result) => {
+    const { resultContainer } = elements;
+    resultContainer.innerHTML = result;
+  };
 
-        const { form } = elements;
+  const init = () => {
+    elements.form = document.querySelector('[data-js="form"]');
+    elements.resultContainer = document.querySelector('[data-js="result"]');
 
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
+    const { form } = elements;
 
-            const formData = serializeForm(form);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-            fetch('/.netlify/functions/verifier', {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
-                }
-            }).then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(response);
-            }).then((data) => {
-                console.log(data);
-                displayResult(data.markup)
-            }).catch((error) => {
-                console.log(error);
-            });
+      const formData = serializeForm(form);
+
+      fetch("/.netlify/functions/verifier", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw response;
+        })
+        .then((data) => {
+          console.log(data);
+          displayResult(data.markup);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-    }
+    });
+  };
 
-
-
-	if (document.readyState === 'complete') {
-		init();
-	} else {
-		window.addEventListener('load', init);
-	}
-
-})()
+  if (document.readyState === "complete") {
+    init();
+  } else {
+    window.addEventListener("load", init);
+  }
+})();

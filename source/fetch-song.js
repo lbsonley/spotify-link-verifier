@@ -7,7 +7,7 @@
  * https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow
  */
 
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 const fetchSong = async (songId) => {
   const client_id = "78e35333ba30494983159f462cde776c"; // Your client id
@@ -53,6 +53,4 @@ const fetchSong = async (songId) => {
   return songData;
 };
 
-module.exports = {
-  fetchSong,
-};
+export default fetchSong;

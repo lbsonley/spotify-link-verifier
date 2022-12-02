@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "netlify dev",
     "deploy": "netlify deploy",
+    "deploy:prod": "netlify deploy --prod",
     "lint": "eslint source/** --fix"
   }
 }

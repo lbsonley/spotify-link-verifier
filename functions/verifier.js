@@ -1,7 +1,7 @@
-const qs = require("node:querystring");
-const { fetchSong } = require("../source/fetch-song");
+import qs from "node:querystring";
+import fetchSong from "../source/fetch-song";
 
-exports.handler = async (event) => {
+export async function handler(event) {
   const regex = /(track\/|track:)([\dA-Za-z]+)/;
 
   const { songLink } = JSON.parse(event.body);
@@ -25,4 +25,4 @@ exports.handler = async (event) => {
             '<div class="result bad"><p>Song does not have preview link...<br/>please select a new one</p></div>',
         }),
   };
-};
+}
